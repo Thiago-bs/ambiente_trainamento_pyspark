@@ -1,0 +1,16 @@
+gsutil -m cp -R "gs://anbima-informacoes-tecnicas-raw-dev/si_fundos/log_fundo_novo.parquet" "gs://anbima_lake/raw/"
+
+
+gsutil -m cp -r dir "gs://anbima-informacoes-tecnicas-raw-dev/si_fundos/*.*"  "gs://anbima_lake/raw/"
+
+
+gsutil cp "gs://anbima-informacoes-tecnicas-raw-dev/manual/TIPO_FUNDOS.csv"  "gs://anbima_lake/raw/"
+
+gsutil cp "gs://anbima-informacoes-tecnicas-raw-dev/manual/tipo_gestor_discricionario.csv"  "gs://anbima_lake/raw/"
+
+
+select * from (
+  select ROW_NUMBER() OVER() as fake_id, *
+  from `data-analytics-252615.fundos_vistas_teste.dim_gestor`
+)as t
+where t.fake_id > 6827;

@@ -1,0 +1,12 @@
+version: '3'
+services:
+ qualicorp:
+   user: root
+   image: jupyter/pyspark-notebook
+   working_dir: /opt/dna-qualicorp/
+   ports:
+     - 8085:8085
+   volumes:
+     - .:/opt/dna-qualicorp/
+   entrypoint: ./docker-entrypoint.sh
+   command: jupyter
